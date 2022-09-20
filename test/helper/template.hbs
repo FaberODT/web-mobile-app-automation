@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>PMC Automation Execution Report Template</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div>
+      <span style="font-size: 17px;">All,</span>
+      <br>
+      <br>
+      <span style="font-size: 17px;">
+        {{message}}
+      </span>
+    </div>
+    <br>
+    <br>
+    <div class="table-title" style="font-size: 20px; font-weight: bold;">
+      Execution Summary:
+      <br>
+      <br>
+    </div>
+    <div class="table" style="padding-top: 5px;">
+      <table>
+        <thead>
+          <tr>
+              <th style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                <span style="font-size: 17px;">Device Name</span>
+              </th>
+              <th style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                <span style="font-size: 17px;">OS Version</span>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-size: 17px; border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+              <span style="font-size: 17px;">{{DeviceName}}</span>
+            </td>
+            <td style="font-size: 17px; border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+              <span style="font-size: 17px;">{{OSVersion}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <table>
+        <thead>
+          <tr>
+            {{#each array.metrics}}
+              <th style="font-size: 17px; border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                {{@key}}
+              </th>
+            {{/each}}
+          </tr>
+        </thead>
+        <tbody>
+          {{#each array}}
+            <tr>
+              {{#each this}}
+                <td style="font-size: 17px; border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                  {{this}}
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>      
+      </table>
+    </div>
+    <br>
+    <br>
+    <div class="table-title" style="font-size: 20px; font-weight: bold;">
+    Detailed Test Suite Summary:
+    <br>
+    </div>
+    <div class="table" style="padding-top: 5px;">
+      <table>
+        <thead>
+          <tr>
+              <th style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                <span style="font-size: 17px;">Suites</span>
+              </th>
+              <th style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                <span style="font-size: 17px;">Tests</span>
+              </th>
+              <th style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                <span style="font-size: 17px;">Status</span>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each newStats}}
+            <tr>
+              {{#with this}}
+                <td style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                  <span style="font-size: 14px;">
+                    {{this.title}}
+                  </span>
+                </td>
+                <td>
+                  {{#each this.tests}}
+                    <tr>
+                      {{#with this}}
+                        <td>
+                        </td>
+                        <td style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                            <span style="font-size: 14px; font-style: italic;">
+                              {{#ifEq this.state 'failed'}}
+                                {{this.title}} <br><br><br> Stacktrace:<br> {{this.error.message}}
+                              {{/ifEq}}
+                              {{#ifEq this.state 'passed'}}
+                                {{this.title}}
+                              {{/ifEq}}
+                              {{#ifEq this.state null}}
+                                {{this.title}}
+                              {{/ifEq}}
+                            </span>
+                        </td>
+                        <td style="border: 1px solid lightgrey; border-collapse: collapse; padding: 2px 4px;">
+                            <span style="font-size: 14px; font-weight: bold; font-style: italic; color:{{#ifEq this.state 'passed'}}#008000{{/ifEq}} {{#ifEq this.state "failed"}}#f49089{{/ifEq}} {{#ifEq this.pending true}}#1E90FF{{/ifEq}} {{#ifEq this.skipped true}}#FFA500{{/ifEq}}">
+                                  {{!-- {{#ifEq this.pending false}}
+                                    {{this.state}}
+                                  {{/ifEq}}
+                                  {{#ifEq this.pending true}}
+                                    pending
+                                  {{/ifEq}}
+                                  {{#ifEq this.skipped true}}
+                                    skipped
+                                  {{/ifEq}} --}}
+                                  {{this.state}}
+                            </span>
+                        </td>
+                      {{/with}}
+                    </tr>
+                  {{/each}}
+                </td>
+              {{/with}}
+            </tr>
+          {{/each}}
+          <br>
+        </tbody>      
+      </table>
+    </div>
+    <div class="sig" style="padding-top: 30px; font-size: 17px;">
+      Regards,<br>
+      PMC Automation Team
+    </div>
+    <div class="logo">
+      <a href="https://www.pmcretail.com/" target="_blank">
+        <img style="width: 100px;" src="{{pmcLogo}}" alt="PMC Retail" />
+      </a>
+    </div>
+  </body>
+</html>
