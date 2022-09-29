@@ -29,25 +29,38 @@ class switchAppScreen {
     }
 
     openGoogleChrome() {
-        driver.terminateApp('org.wikipedia.alpha');
-        // driver.startActivity("com.android.chrome", "com.google.android.apps.chrome.Main");
+        
+        // driver.terminateApp('org.wikipedia.alpha');
+        // browser.pause(10000);
+        driver.startActivity("com.android.chrome", "com.google.android.apps.chrome.Main", "", "","", "android.intent.category.DEFAULT", );
+        // driver.startActivity({
+        //     appPackage: "com.android.chrome",
+        //     appActivity: "com.google.android.apps.chrome.Main",
+        //     intentCategory: "android.intent.category.DEFAULT"
+        //   })
+        // browser.pause(5000);
         //browser.url("https://www.yahoo.com"); 
         // driver.get("https://www.yahoo.com");
         // driver.url("http://appium.io");
-        driver.activateApp('com.android.chrome');
+        // driver.activateApp('com.android.chrome');
+        browser.pause(10000);
         console.log("Current activity in web is: " + driver.getCurrentActivity());
+        console.log("Current package is: " + driver.getCurrentPackage());
         ////browser.pause(5000);
         browser.url("https://www.yahoo.com");
+        // driver.url("http://appium.io");
         browser.pause(5000);
 
-        driver.terminateApp('com.android.chrome');
+        // driver.terminateApp('com.android.chrome');
         browser.pause(5000);
         try{
             console.log("I am in try");
-            driver.activateApp('org.wikipedia.alpha');    
+            // driver.activateApp('org.wikipedia.alpha');    
+            driver.startActivity("org.wikipedia.alpha", "org.wikipedia.main.MainActivity");
         }catch{
             console.log("I am in catch");
-            driver.launchApp();
+            // driver.launchApp();
+            driver.startActivity("org.wikipedia.alpha", "org.wikipedia.main.MainActivity");
         }
         
         // driver.url("http://appium.io");

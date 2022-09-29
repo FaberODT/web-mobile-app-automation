@@ -11,11 +11,11 @@ describe('Cross testing demo', () => {
     
     it('Automate Mobile and Web app together', () => {
         console.log("I am into spec");
-        //following method call will click on Search icon button
-        // SwitchAppScreen.clickOnSearchIconBtn();
+        // following method call will click on Search icon button
+        SwitchAppScreen.clickOnSearchIconBtn();
 
-        //following method call will enter keyword into search text box
-        // SwitchAppScreen.enterSearchValue();
+        // following method call will enter keyword into search text box
+        SwitchAppScreen.enterSearchValue();
 
         //open chrome
         SwitchAppScreen.openGoogleChrome();
